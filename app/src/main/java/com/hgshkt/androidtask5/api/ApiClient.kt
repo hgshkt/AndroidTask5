@@ -7,12 +7,14 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
 
-    private val baseUrl = "https://akabab.github.io/superhero-api/api"
+    private const val baseUrl = "https://akabab.github.io"
 
-    val client = Retrofit.Builder()
-        .client(OkHttpClient())
-        .addConverterFactory(GsonConverterFactory.create())
-        .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-        .baseUrl(baseUrl)
-        .build()
+    val client: Retrofit by lazy {
+        Retrofit.Builder()
+            .baseUrl(baseUrl)
+            .addConverterFactory(GsonConverterFactory.create())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+            .client(OkHttpClient())
+            .build()
+    }
 }
