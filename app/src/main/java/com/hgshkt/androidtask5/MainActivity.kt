@@ -5,16 +5,20 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.hgshkt.androidtask5.api.ApiClient.client
 import com.hgshkt.androidtask5.api.ApiInterface
+import com.hgshkt.androidtask5.api.model.SuperHero
+import com.hgshkt.androidtask5.fragments.details.model.SuperHeroDetail
 import com.hgshkt.androidtask5.fragments.list.ListFragment
 import com.hgshkt.androidtask5.mappers.ImageSizeType
+import com.hgshkt.androidtask5.mappers.toDetail
 import com.hgshkt.androidtask5.mappers.toDisplay
-import com.hgshkt.androidtask5.model.SuperHeroDisplay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var listFragment: ListFragment
+
+    private var listDetail = mutableListOf<SuperHeroDetail>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -28,16 +32,11 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun request(
-        handleResponse: (MutableList<SuperHeroDisplay>, Throwable?) -> Unit
+        handleResponse: (List<SuperHero>, Throwable?) -> Unit
     ) {
         client.create(ApiInterface::class.java)
             .getSuperHeroes()
             .subscribeOn(Schedulers.io())
-            .map { response ->
-                response.map { superHero ->
-                    superHero.toDisplay(ImageSizeType.MD)
-                }.toMutableList()
-            }
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe { list, error ->
                 handleResponse(list, error)
@@ -47,10 +46,17 @@ class MainActivity : AppCompatActivity() {
 
 
     private fun handleResponse(
-        list: MutableList<SuperHeroDisplay>,
+        list: List<SuperHero>,
         error: Throwable?
     ) {
-        listFragment.list = list
+        listFragment.list = list.map {
+            it.toDisplay(ImageSizeType.MD)
+        }.toMutableList()
+
+        listDetail = list.map {
+            it.toDetail(ImageSizeType.LG)
+        }.toMutableList()
+
         error?.let {
             showError(error)
         }
