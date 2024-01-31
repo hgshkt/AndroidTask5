@@ -1,6 +1,6 @@
 package com.hgshkt.androidtask5.fragments.details.model
 
-data class DetailsPowerStats(
+data class PowerStatsDetail(
     val intelligence: Int,
     val strength: Int,
     val speed: Int,

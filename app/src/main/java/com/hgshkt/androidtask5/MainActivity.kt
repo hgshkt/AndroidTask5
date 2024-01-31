@@ -6,6 +6,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.hgshkt.androidtask5.api.ApiClient.client
 import com.hgshkt.androidtask5.api.ApiInterface
 import com.hgshkt.androidtask5.fragments.list.ListFragment
+import com.hgshkt.androidtask5.mappers.ImageSizeType
+import com.hgshkt.androidtask5.mappers.toDisplay
 import com.hgshkt.androidtask5.model.SuperHeroDisplay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers

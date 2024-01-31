@@ -1,8 +1,8 @@
 package com.hgshkt.androidtask5.fragments.details.model
 
-data class DetailsSuperHero(
+data class SuperHeroDetail(
     val imageUrl: String,
     val name: String,
-    val powerStats: DetailsPowerStats,
-    val biography: DetailsBiography
+    val powerStats: PowerStatsDetail,
+    val biography: BiographyDetail
 )

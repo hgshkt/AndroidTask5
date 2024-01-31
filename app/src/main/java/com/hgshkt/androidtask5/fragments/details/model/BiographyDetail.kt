@@ -1,6 +1,6 @@
 package com.hgshkt.androidtask5.fragments.details.model
 
-data class DetailsBiography(
+data class BiographyDetail(
     val fullName: String,
     val alterEgos: String,
     val placeOfBirth: String,
