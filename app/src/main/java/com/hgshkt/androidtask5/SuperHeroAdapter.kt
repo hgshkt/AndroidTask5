@@ -10,8 +10,9 @@ import com.bumptech.glide.Glide
 import com.hgshkt.androidtask5.model.SuperHeroDisplay
 
 class SuperHeroAdapter(
-    private val items: MutableList<SuperHeroDisplay>
-): RecyclerView.Adapter<SuperHeroRecyclerViewHolder>() {
+    private val items: MutableList<SuperHeroDisplay>,
+    private val onItemClick: (SuperHeroDisplay) -> Unit
+) : RecyclerView.Adapter<SuperHeroRecyclerViewHolder>() {
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -29,6 +30,10 @@ class SuperHeroAdapter(
         holder: SuperHeroRecyclerViewHolder,
         position: Int
     ) {
+        holder.itemView.setOnClickListener {
+            onItemClick(items[position])
+        }
+
         val superHero = items[position]
         holder.name.text = superHero.name
 
@@ -40,7 +45,7 @@ class SuperHeroAdapter(
 
 class SuperHeroRecyclerViewHolder(
     view: View
-): RecyclerView.ViewHolder(view) {
+) : RecyclerView.ViewHolder(view) {
     val image: ImageView = view.findViewById(R.id.super_hero_image)
     val name: TextView = view.findViewById(R.id.nameTextView)
 }
