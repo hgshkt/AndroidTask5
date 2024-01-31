@@ -1,19 +1,18 @@
 package com.hgshkt.androidtask5
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
+import androidx.appcompat.app.AppCompatActivity
 import com.hgshkt.androidtask5.api.ApiClient.client
 import com.hgshkt.androidtask5.api.ApiInterface
+import com.hgshkt.androidtask5.fragments.ListFragment
 import com.hgshkt.androidtask5.model.SuperHeroDisplay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var recyclerView: RecyclerView
+    private lateinit var listFragment: ListFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,17 +42,13 @@ class MainActivity : AppCompatActivity() {
             }
     }
 
-    private fun updateUI(list: MutableList<SuperHeroDisplay>) {
-        val adapter = SuperHeroAdapter(list)
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(this)
-    }
+
 
     private fun handleResponse(
         list: MutableList<SuperHeroDisplay>,
         error: Throwable?
     ) {
-        updateUI(list)
+        listFragment.list = list
         error?.let {
             showError(error)
         }
@@ -64,6 +59,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun init() {
-        recyclerView = findViewById(R.id.recyclerView)
+        listFragment = supportFragmentManager.findFragmentById(R.id.listFragmentContainer) as ListFragment
     }
 }
