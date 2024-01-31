@@ -18,7 +18,6 @@ import io.reactivex.schedulers.Schedulers
 class MainActivity : AppCompatActivity() {
 
     private lateinit var listFragment: ListFragment
-    private var detailsFragment: DetailsFragment? = null
 
     private var listDetail = mutableListOf<SuperHeroDetail>()
 
@@ -27,6 +26,20 @@ class MainActivity : AppCompatActivity() {
         setContentView(R.layout.activity_main)
 
         init()
+
+        listFragment.onItemClick = { superHero ->
+
+            val detailsFragment = DetailsFragment()
+
+            detailsFragment.superHero = listDetail.find {
+                it.name == superHero.name
+            }
+
+            supportFragmentManager.beginTransaction()
+                .add(R.id.listFragmentContainer, detailsFragment)
+//                .addToBackStack("details_fragment")
+                .commit()
+        }
     }
 
     override fun onStart() {
@@ -34,20 +47,6 @@ class MainActivity : AppCompatActivity() {
 
         request { list, error ->
             handleResponse(list, error)
-        }
-
-        listFragment.onItemClick = { superHero ->
-
-            detailsFragment = DetailsFragment()
-
-            detailsFragment?.superHero = listDetail.find {
-                it.name == superHero.name
-            }
-
-            supportFragmentManager.beginTransaction()
-                .add(R.id.listFragmentContainer, detailsFragment!!)
-//                .addToBackStack("details_fragment")
-                .commit()
         }
     }
 
@@ -88,6 +87,5 @@ class MainActivity : AppCompatActivity() {
     private fun init() {
         listFragment =
             supportFragmentManager.findFragmentById(R.id.listFragmentContainer) as ListFragment
-
     }
 }

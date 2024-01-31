@@ -13,9 +13,11 @@ import com.hgshkt.androidtask5.model.SuperHeroDisplay
 
 class ListFragment : Fragment() {
 
-    private lateinit var recyclerView: RecyclerView
+    private var recyclerView: RecyclerView? = null
 
     var onItemClick: (SuperHeroDisplay) -> Unit = {}
+
+    private var adapter: SuperHeroAdapter? = null
 
     var list = mutableListOf<SuperHeroDisplay>()
         set(value) {
@@ -28,26 +30,28 @@ class ListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return super.onCreateView(inflater, container, savedInstanceState)
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        val view = inflater.inflate(R.layout.list_fragment_layout, container, false)
 
         init(view)
 
-        val adapter = SuperHeroAdapter(list) { item ->
+        adapter = SuperHeroAdapter(list) { item ->
             onItemClick(item)
         }
-        recyclerView.adapter = adapter
-        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+        recyclerView?.adapter = adapter
+        recyclerView?.layoutManager = LinearLayoutManager(requireContext())
+
+        return view
     }
 
     private fun updateUI() {
-
+        adapter = SuperHeroAdapter(list) { item ->
+            onItemClick(item)
+        }
+        recyclerView?.adapter = adapter
+        recyclerView?.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun init(view: View) {
-        recyclerView = view.findViewById(R.id.recyclerView)
+    private fun init(view: View?) {
+        recyclerView = view?.findViewById(R.id.recyclerView)
     }
 }
