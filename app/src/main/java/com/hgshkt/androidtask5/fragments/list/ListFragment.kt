@@ -1,4 +1,4 @@
-package com.hgshkt.androidtask5.fragments
+package com.hgshkt.androidtask5.fragments.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
