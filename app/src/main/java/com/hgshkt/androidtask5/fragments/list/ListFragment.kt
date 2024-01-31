@@ -15,6 +15,8 @@ class ListFragment : Fragment() {
 
     private lateinit var recyclerView: RecyclerView
 
+    var onItemClick: (SuperHeroDisplay) -> Unit = {}
+
     var list = mutableListOf<SuperHeroDisplay>()
         set(value) {
             field = value
@@ -26,18 +28,26 @@ class ListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        init(container!!)
-
         return super.onCreateView(inflater, container, savedInstanceState)
     }
 
-    private fun updateUI() {
-        val adapter = SuperHeroAdapter(list)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        init(view)
+
+        val adapter = SuperHeroAdapter(list) { item ->
+            onItemClick(item)
+        }
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
     }
 
-    private fun init(container: ViewGroup) {
-        recyclerView = container.findViewById(R.id.recyclerView)
+    private fun updateUI() {
+
+    }
+
+    private fun init(view: View) {
+        recyclerView = view.findViewById(R.id.recyclerView)
     }
 }
