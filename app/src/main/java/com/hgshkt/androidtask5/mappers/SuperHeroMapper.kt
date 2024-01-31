@@ -16,8 +16,8 @@ fun SuperHero.toDetail(imageSizeType: ImageSizeType): SuperHeroDetail {
     return SuperHeroDetail(
         name = name,
         imageUrl = urlByImageSize(imageSizeType, images),
-        biography = biography.toDetail(),
-        powerStats = powerStats.toDetail()
+        biography = biography?.toDetail(),
+        powerStats = powerStats?.toDetail()
     )
 }
 

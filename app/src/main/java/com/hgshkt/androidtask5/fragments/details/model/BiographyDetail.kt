@@ -5,5 +5,5 @@ data class BiographyDetail(
     val alterEgos: String,
     val placeOfBirth: String,
     val firstAppearance: String,
-    val publisher: String
+    val publisher: String?
 )
