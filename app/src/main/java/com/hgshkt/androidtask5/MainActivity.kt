@@ -46,6 +46,7 @@ class MainActivity : AppCompatActivity() {
 
             supportFragmentManager.beginTransaction()
                 .replace(R.id.listFragmentContainer, detailsFragment!!)
+                .addToBackStack("details_fragment")
                 .commit()
         }
     }
