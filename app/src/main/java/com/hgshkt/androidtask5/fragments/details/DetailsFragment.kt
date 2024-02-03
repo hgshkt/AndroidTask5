@@ -14,10 +14,6 @@ import com.hgshkt.androidtask5.fragments.details.model.SuperHeroDetail
 class DetailsFragment : Fragment() {
 
     var superHero: SuperHeroDetail? = null
-        set(value) {
-            field = value
-            updateUI(value)
-        }
 
     private lateinit var imageView: ImageView
 
@@ -39,16 +35,18 @@ class DetailsFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.list_fragment_layout, container, false)
+        return inflater.inflate(R.layout.details_fragment_layout, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         init(view)
-
-        return view
+        updateUI()
     }
 
     private fun init(view: View) {
         imageView = view.findViewById(R.id.detailImageView)
-        nameTextView = view.findViewById(R.id.nameTextView)
+        nameTextView = view.findViewById(R.id.detailName)
         intelligenceTextView = view.findViewById(R.id.detailIntelligence)
         strengthTextView = view.findViewById(R.id.detailStrength)
         speedTextView = view.findViewById(R.id.detailSpeed)
@@ -62,7 +60,7 @@ class DetailsFragment : Fragment() {
         publisherTextView = view.findViewById(R.id.detailPublisher)
     }
 
-    private fun updateUI(superHero: SuperHeroDetail?) {
+    private fun updateUI() {
         Glide.with(requireContext())
             .load(superHero?.imageUrl)
             .error(android.R.drawable.ic_menu_report_image)
