@@ -66,7 +66,7 @@ class DetailsFragment : Fragment() {
             .error(android.R.drawable.ic_menu_report_image)
             .into(imageView)
 
-        nameTextView.text = "Name: ${superHero?.name}"
+        nameTextView.text = superHero?.name
         intelligenceTextView.text = "Intelligence: ${superHero?.powerStats?.intelligence}"
         strengthTextView.text = "Strength: ${superHero?.powerStats?.intelligence}"
         speedTextView.text = "Speed: ${superHero?.powerStats?.intelligence}"
