@@ -30,17 +30,13 @@ class ListFragment : Fragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.list_fragment_layout, container, false)
+        return inflater.inflate(R.layout.list_fragment_layout, container, false)
+    }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         init(view)
-
-        adapter = SuperHeroAdapter(list) { item ->
-            onItemClick(item)
-        }
-        recyclerView?.adapter = adapter
-        recyclerView?.layoutManager = LinearLayoutManager(requireContext())
-
-        return view
+        updateUI()
     }
 
     private fun updateUI() {
