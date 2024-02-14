@@ -1,8 +1,8 @@
 package com.hgshkt.androidtask5.api
 
+import com.jakewharton.retrofit2.adapter.kotlin.coroutines.experimental.CoroutineCallAdapterFactory
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
-import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
 
 object ApiClient {
@@ -12,8 +12,8 @@ object ApiClient {
     val client: Retrofit by lazy {
         Retrofit.Builder()
             .baseUrl(baseUrl)
+            .addCallAdapterFactory(CoroutineCallAdapterFactory())
             .addConverterFactory(GsonConverterFactory.create())
-            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .client(OkHttpClient())
             .build()
     }
