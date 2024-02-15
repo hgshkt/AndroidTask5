@@ -14,6 +14,11 @@ import com.hgshkt.androidtask5.mappers.toDetail
 import com.hgshkt.androidtask5.mappers.toDisplay
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import retrofit2.create
 
 class MainActivity : AppCompatActivity() {
 
@@ -21,6 +26,7 @@ class MainActivity : AppCompatActivity() {
     private var detailsFragment: DetailsFragment? = null
 
     private var listDetail = mutableListOf<SuperHeroDetail>()
+    private var repository = client.create<ApiInterface>()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +45,6 @@ class MainActivity : AppCompatActivity() {
         listFragment.onItemClick = { superHero ->
             detailsFragment = DetailsFragment()
 
-
             detailsFragment!!.superHero = listDetail.find {
                 it.name == superHero.name
             }
@@ -54,13 +59,12 @@ class MainActivity : AppCompatActivity() {
     private fun request(
         handleResponse: (List<SuperHero>, Throwable?) -> Unit
     ) {
-        client.create(ApiInterface::class.java)
-            .getSuperHeroes()
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe { list, error ->
-                handleResponse(list, error)
+        CoroutineScope(Dispatchers.IO).launch {
+            val list = repository.getSuperHeroes()
+            withContext(Dispatchers.Main) {
+                handleResponse(list, null)
             }
+        }
     }
 
 
