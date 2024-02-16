@@ -1,6 +1,6 @@
 package com.hgshkt.androidtask5.data.mappers
 
-import com.hgshkt.androidtask5.api.model.PowerStats
+import com.hgshkt.androidtask5.data.repository.model.PowerStats
 import com.hgshkt.androidtask5.fragments.details.model.PowerStatsDetail
 
 fun PowerStats.toDetail(): PowerStatsDetail {

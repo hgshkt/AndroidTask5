@@ -1,4 +1,4 @@
-package com.hgshkt.androidtask5.api.model
+package com.hgshkt.androidtask5.data.repository.model
 
 data class Images(
     val xs: String,

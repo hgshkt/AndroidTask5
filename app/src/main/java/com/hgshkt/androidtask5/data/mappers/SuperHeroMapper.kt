@@ -1,7 +1,7 @@
 package com.hgshkt.androidtask5.data.mappers
 
-import com.hgshkt.androidtask5.api.model.Images
-import com.hgshkt.androidtask5.api.model.SuperHero
+import com.hgshkt.androidtask5.data.repository.model.Images
+import com.hgshkt.androidtask5.data.repository.model.SuperHero
 import com.hgshkt.androidtask5.fragments.details.model.SuperHeroDetail
 import com.hgshkt.androidtask5.model.SuperHeroDisplay
 

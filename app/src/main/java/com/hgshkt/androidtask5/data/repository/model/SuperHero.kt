@@ -1,4 +1,4 @@
-package com.hgshkt.androidtask5.api.model
+package com.hgshkt.androidtask5.data.repository.model
 
 import com.google.gson.annotations.SerializedName
 
