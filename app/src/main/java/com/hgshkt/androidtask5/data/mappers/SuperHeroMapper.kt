@@ -1,4 +1,4 @@
-package com.hgshkt.androidtask5.mappers
+package com.hgshkt.androidtask5.data.mappers
 
 import com.hgshkt.androidtask5.api.model.Images
 import com.hgshkt.androidtask5.api.model.SuperHero

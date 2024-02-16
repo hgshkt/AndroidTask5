@@ -9,11 +9,9 @@ import com.hgshkt.androidtask5.api.model.SuperHero
 import com.hgshkt.androidtask5.fragments.details.DetailsFragment
 import com.hgshkt.androidtask5.fragments.details.model.SuperHeroDetail
 import com.hgshkt.androidtask5.fragments.list.ListFragment
-import com.hgshkt.androidtask5.mappers.ImageSizeType
-import com.hgshkt.androidtask5.mappers.toDetail
-import com.hgshkt.androidtask5.mappers.toDisplay
-import io.reactivex.android.schedulers.AndroidSchedulers
-import io.reactivex.schedulers.Schedulers
+import com.hgshkt.androidtask5.data.mappers.ImageSizeType
+import com.hgshkt.androidtask5.data.mappers.toDetail
+import com.hgshkt.androidtask5.data.mappers.toDisplay
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
