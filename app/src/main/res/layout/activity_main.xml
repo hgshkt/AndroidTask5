@@ -5,7 +5,7 @@
 
     <androidx.fragment.app.FragmentContainerView
         android:id="@+id/listFragmentContainer"
-        android:name="com.hgshkt.androidtask5.fragments.list.ListFragment"
+        android:name="com.hgshkt.androidtask5.view.fragments.list.ListFragment"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
 

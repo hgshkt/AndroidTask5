@@ -1,4 +1,4 @@
-package com.hgshkt.androidtask5.fragments.details.model
+package com.hgshkt.androidtask5.view.fragments.details.model
 
 data class BiographyDetail(
     val fullName: String,

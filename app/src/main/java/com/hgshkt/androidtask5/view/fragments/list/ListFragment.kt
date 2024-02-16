@@ -1,4 +1,4 @@
-package com.hgshkt.androidtask5.fragments.list
+package com.hgshkt.androidtask5.view.fragments.list
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,8 +8,8 @@ import androidx.fragment.app.Fragment
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.hgshkt.androidtask5.R
-import com.hgshkt.androidtask5.SuperHeroAdapter
-import com.hgshkt.androidtask5.model.SuperHeroDisplay
+import com.hgshkt.androidtask5.view.SuperHeroAdapter
+import com.hgshkt.androidtask5.view.model.SuperHeroDisplay
 
 class ListFragment : Fragment() {
 

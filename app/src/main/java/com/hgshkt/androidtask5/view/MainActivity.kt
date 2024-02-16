@@ -1,14 +1,15 @@
-package com.hgshkt.androidtask5
+package com.hgshkt.androidtask5.view
 
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import com.hgshkt.androidtask5.R
 import com.hgshkt.androidtask5.data.api.ApiClient.client
 import com.hgshkt.androidtask5.data.api.ApiInterface
 import com.hgshkt.androidtask5.data.repository.model.SuperHero
-import com.hgshkt.androidtask5.fragments.details.DetailsFragment
-import com.hgshkt.androidtask5.fragments.details.model.SuperHeroDetail
-import com.hgshkt.androidtask5.fragments.list.ListFragment
+import com.hgshkt.androidtask5.view.fragments.details.DetailsFragment
+import com.hgshkt.androidtask5.view.fragments.details.model.SuperHeroDetail
+import com.hgshkt.androidtask5.view.fragments.list.ListFragment
 import com.hgshkt.androidtask5.data.mappers.ImageSizeType
 import com.hgshkt.androidtask5.data.mappers.toDetail
 import com.hgshkt.androidtask5.data.mappers.toDisplay

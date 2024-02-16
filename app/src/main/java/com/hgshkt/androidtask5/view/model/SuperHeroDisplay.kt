@@ -1,4 +1,4 @@
-package com.hgshkt.androidtask5.model
+package com.hgshkt.androidtask5.view.model
 
 data class SuperHeroDisplay(
     val name: String?,

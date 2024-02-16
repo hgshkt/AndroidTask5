@@ -1,4 +1,4 @@
-package com.hgshkt.androidtask5.fragments.details
+package com.hgshkt.androidtask5.view.fragments.details
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,7 +9,7 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import com.bumptech.glide.Glide
 import com.hgshkt.androidtask5.R
-import com.hgshkt.androidtask5.fragments.details.model.SuperHeroDetail
+import com.hgshkt.androidtask5.view.fragments.details.model.SuperHeroDetail
 
 class DetailsFragment : Fragment() {
 

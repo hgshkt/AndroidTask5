@@ -1,4 +1,4 @@
-package com.hgshkt.androidtask5
+package com.hgshkt.androidtask5.view
 
 import android.view.LayoutInflater
 import android.view.View
@@ -7,7 +7,8 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
-import com.hgshkt.androidtask5.model.SuperHeroDisplay
+import com.hgshkt.androidtask5.R
+import com.hgshkt.androidtask5.view.model.SuperHeroDisplay
 
 class SuperHeroAdapter(
     private val items: MutableList<SuperHeroDisplay>,

@@ -2,8 +2,8 @@ package com.hgshkt.androidtask5.data.mappers
 
 import com.hgshkt.androidtask5.data.repository.model.Images
 import com.hgshkt.androidtask5.data.repository.model.SuperHero
-import com.hgshkt.androidtask5.fragments.details.model.SuperHeroDetail
-import com.hgshkt.androidtask5.model.SuperHeroDisplay
+import com.hgshkt.androidtask5.view.fragments.details.model.SuperHeroDetail
+import com.hgshkt.androidtask5.view.model.SuperHeroDisplay
 
 fun SuperHero.toDisplay(imageSizeType: ImageSizeType): SuperHeroDisplay {
     return SuperHeroDisplay(
