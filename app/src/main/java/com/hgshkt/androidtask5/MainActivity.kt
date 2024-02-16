@@ -3,8 +3,8 @@ package com.hgshkt.androidtask5
 import android.os.Bundle
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.hgshkt.androidtask5.api.ApiClient.client
-import com.hgshkt.androidtask5.api.ApiInterface
+import com.hgshkt.androidtask5.data.api.ApiClient.client
+import com.hgshkt.androidtask5.data.api.ApiInterface
 import com.hgshkt.androidtask5.data.repository.model.SuperHero
 import com.hgshkt.androidtask5.fragments.details.DetailsFragment
 import com.hgshkt.androidtask5.fragments.details.model.SuperHeroDetail

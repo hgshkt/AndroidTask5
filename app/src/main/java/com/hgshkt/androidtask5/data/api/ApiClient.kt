@@ -1,4 +1,4 @@
-package com.hgshkt.androidtask5.api
+package com.hgshkt.androidtask5.data.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
