@@ -2,10 +2,11 @@ package com.hgshkt.androidtask5.data.api
 
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Inject
 
-object ApiClient {
+class ApiClient @Inject constructor() {
 
-    private const val baseUrl = "https://akabab.github.io"
+    private val baseUrl = "https://akabab.github.io"
 
     val client: Retrofit by lazy {
         Retrofit.Builder()

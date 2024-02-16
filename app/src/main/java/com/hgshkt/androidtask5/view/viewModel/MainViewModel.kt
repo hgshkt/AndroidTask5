@@ -7,20 +7,21 @@ import androidx.lifecycle.viewModelScope
 import com.hgshkt.androidtask5.data.mappers.ImageSizeType
 import com.hgshkt.androidtask5.data.mappers.toDetail
 import com.hgshkt.androidtask5.data.mappers.toDisplay
-import com.hgshkt.androidtask5.data.repository.SuperHeroRepositoryImpl
+import com.hgshkt.androidtask5.data.repository.SuperHeroRepository
 import com.hgshkt.androidtask5.view.fragments.details.model.SuperHeroDetail
 import com.hgshkt.androidtask5.view.model.SuperHeroDisplay
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class MainViewModel : ViewModel() {
+class MainViewModel @Inject constructor(
+    private val repository: SuperHeroRepository
+): ViewModel() {
 
     private val _uiState = MutableLiveData<UIState>(UIState.EmptyList)
     val uiState: LiveData<UIState> = _uiState
 
     private var displayList: List<SuperHeroDisplay> = mutableListOf()
     private var detailList: List<SuperHeroDetail> = mutableListOf()
-
-    lateinit var repository: SuperHeroRepositoryImpl
 
     fun getSuperHeroes() {
         viewModelScope.launch {
