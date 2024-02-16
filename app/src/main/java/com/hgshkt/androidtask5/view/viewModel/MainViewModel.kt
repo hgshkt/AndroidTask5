@@ -37,9 +37,11 @@ class MainViewModel : ViewModel() {
         }
     }
 
-    fun openDetailScreen(index: Int) {
-        val hero = detailList[index]
-        val state = UIState.DetailedScreen(hero)
+    fun openDetailScreen(clickedSuperHero: SuperHeroDisplay) {
+        val hero = detailList.find {
+            it.name == clickedSuperHero.name
+        }
+        val state = UIState.DetailedScreen(hero!!)
         _uiState.postValue(state)
     }
 

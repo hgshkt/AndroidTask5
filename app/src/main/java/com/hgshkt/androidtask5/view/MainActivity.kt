@@ -13,6 +13,8 @@ import com.hgshkt.androidtask5.view.fragments.list.ListFragment
 import com.hgshkt.androidtask5.data.mappers.ImageSizeType
 import com.hgshkt.androidtask5.data.mappers.toDetail
 import com.hgshkt.androidtask5.data.mappers.toDisplay
+import com.hgshkt.androidtask5.view.model.SuperHeroDisplay
+import com.hgshkt.androidtask5.view.viewModel.MainViewModel
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -27,6 +29,8 @@ class MainActivity : AppCompatActivity() {
     private var listDetail = mutableListOf<SuperHeroDetail>()
     private var repository = client.create<ApiInterface>()
 
+    private lateinit var viewModel: MainViewModel
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -37,55 +41,39 @@ class MainActivity : AppCompatActivity() {
     override fun onStart() {
         super.onStart()
 
-        request { list, error ->
-            handleResponse(list, error)
+        viewModel.uiState.observe(this) { updatedState ->
+            when (updatedState) {
+                is MainViewModel.UIState.EmptyList -> updateUIStateEmpty()
+                is MainViewModel.UIState.FilledList -> updateUIStateFilled(updatedState.list)
+                is MainViewModel.UIState.DetailedScreen -> updateUIStateDetail(updatedState.superHero)
+            }
         }
+
+        viewModel.getSuperHeroes()
 
         listFragment.onItemClick = { superHero ->
-            detailsFragment = DetailsFragment()
+            viewModel.openDetailScreen(superHero)
+        }
+    }
 
-            detailsFragment!!.superHero = listDetail.find {
-                it.name == superHero.name
+    private fun updateUIStateDetail(superHero: SuperHeroDetail) {
+        val detailsFragment = detailsFragment ?: DetailsFragment()
+            .apply {
+                this.superHero = superHero
             }
 
-            supportFragmentManager.beginTransaction()
-                .replace(R.id.listFragmentContainer, detailsFragment!!)
-                .addToBackStack("details_fragment")
-                .commit()
-        }
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.listFragmentContainer, detailsFragment)
+            .addToBackStack("details_fragment")
+            .commit()
     }
 
-    private fun request(
-        handleResponse: (List<SuperHero>, Throwable?) -> Unit
-    ) {
-        CoroutineScope(Dispatchers.IO).launch {
-            val list = repository.getSuperHeroes()
-            withContext(Dispatchers.Main) {
-                handleResponse(list, null)
-            }
-        }
+    private fun updateUIStateFilled(list: List<SuperHeroDisplay>) {
+        listFragment.list = list.toMutableList()
     }
 
-
-    private fun handleResponse(
-        list: List<SuperHero>,
-        error: Throwable?
-    ) {
-        listFragment.list = list.map {
-            it.toDisplay(ImageSizeType.MD)
-        }.toMutableList()
-
-        listDetail = list.map {
-            it.toDetail(ImageSizeType.LG)
-        }.toMutableList()
-
-        error?.let {
-            showError(error)
-        }
-    }
-
-    private fun showError(error: Throwable) {
-        Toast.makeText(this, error.message, Toast.LENGTH_SHORT).show()
+    private fun updateUIStateEmpty() {
+        listDetail.clear()
     }
 
     private fun init() {
