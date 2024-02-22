@@ -1,6 +1,7 @@
 package com.hgshkt.androidtask5.view
 
 import android.os.Bundle
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.hgshkt.androidtask5.R
 import com.hgshkt.androidtask5.view.fragments.details.DetailsFragment
@@ -37,6 +38,7 @@ class MainActivity : AppCompatActivity() {
                 is MainViewModel.UIState.EmptyList -> updateUIStateEmpty()
                 is MainViewModel.UIState.FilledList -> updateUIStateFilled(updatedState.list)
                 is MainViewModel.UIState.DetailedScreen -> updateUIStateDetail(updatedState.superHero)
+                is MainViewModel.UIState.Error -> updateUIStateError(updatedState.errorMessage)
             }
         }
 
@@ -45,6 +47,10 @@ class MainActivity : AppCompatActivity() {
         listFragment.onItemClick = { superHero ->
             viewModel.openDetailScreen(superHero)
         }
+    }
+
+    private fun updateUIStateError(errorMessage: String) {
+        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
     }
 
     private fun updateUIStateDetail(superHero: SuperHeroDetail) {

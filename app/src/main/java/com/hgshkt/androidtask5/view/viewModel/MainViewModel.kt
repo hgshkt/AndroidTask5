@@ -15,26 +15,34 @@ import javax.inject.Inject
 
 class MainViewModel @Inject constructor(
     private val repository: SuperHeroRepository
-): ViewModel() {
+) : ViewModel() {
 
     private val _uiState = MutableLiveData<UIState>(UIState.EmptyList)
     val uiState: LiveData<UIState> = _uiState
 
-    private var displayList: List<SuperHeroDisplay> = mutableListOf()
-    private var detailList: List<SuperHeroDetail> = mutableListOf()
+    var displayList: List<SuperHeroDisplay> = mutableListOf()
+        private set
+    var detailList: List<SuperHeroDetail> = mutableListOf()
+        private set
 
     fun getSuperHeroes() {
         viewModelScope.launch {
-            val list = repository.getSuperHeroes()
+            val response = repository.getSuperHeroes()
 
-            displayList = list.map {
-                it.toDisplay(ImageSizeType.MD)
-            }
-            detailList = list.map {
-                it.toDetail(ImageSizeType.LG)
-            }
+            if (response.isSuccessful) {
+                val list = response.body!!
 
-            _uiState.postValue(UIState.FilledList(displayList))
+                displayList = list.map {
+                    it.toDisplay(ImageSizeType.MD)
+                }
+                detailList = list.map {
+                    it.toDetail(ImageSizeType.LG)
+                }
+
+                _uiState.postValue(UIState.FilledList(displayList))
+            } else {
+                _uiState.postValue(UIState.Error(response.errorMassage!!))
+            }
         }
     }
 
@@ -48,6 +56,7 @@ class MainViewModel @Inject constructor(
 
     sealed class UIState {
         data object EmptyList : UIState()
+        data class Error(val errorMessage: String) : UIState()
         data class FilledList(val list: List<SuperHeroDisplay>) : UIState()
         data class DetailedScreen(val superHero: SuperHeroDetail) : UIState()
     }
