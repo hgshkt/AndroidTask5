@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">AndroidTask5</string>
+    <string name="reload_button_text">Reload</string>
+    <string name="error_text">Error</string>
 </resources>
