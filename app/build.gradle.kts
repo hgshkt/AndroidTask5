@@ -38,6 +38,8 @@ android {
 }
 
 dependencies {
+    // Fragment
+    implementation("androidx.fragment:fragment-ktx:1.1.0")
     // Gson
     implementation("com.google.code.gson:gson:2.10.1")
 

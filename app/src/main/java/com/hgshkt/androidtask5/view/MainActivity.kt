@@ -1,9 +1,9 @@
 package com.hgshkt.androidtask5.view
 
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.hgshkt.androidtask5.R
+import com.hgshkt.androidtask5.view.fragments.ErrorFragment
 import com.hgshkt.androidtask5.view.fragments.details.DetailsFragment
 import com.hgshkt.androidtask5.view.fragments.details.model.SuperHeroDetail
 import com.hgshkt.androidtask5.view.fragments.list.ListFragment
@@ -50,7 +50,21 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun updateUIStateError(errorMessage: String) {
-        Toast.makeText(this, errorMessage, Toast.LENGTH_LONG).show()
+        val errorFragment = ErrorFragment()
+            .apply {
+                this.errorMessage = errorMessage
+                reloadButtonClick = {
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.listFragmentContainer, listFragment)
+                        .addToBackStack(listFragment.javaClass.name)
+                        .commit()
+                    viewModel.getSuperHeroes()
+                }
+            }
+
+        supportFragmentManager.beginTransaction()
+            .replace(R.id.listFragmentContainer, errorFragment)
+            .commit()
     }
 
     private fun updateUIStateDetail(superHero: SuperHeroDetail) {
@@ -61,7 +75,7 @@ class MainActivity : AppCompatActivity() {
 
         supportFragmentManager.beginTransaction()
             .replace(R.id.listFragmentContainer, detailsFragment)
-            .addToBackStack("details_fragment")
+            .addToBackStack(detailsFragment.javaClass.name)
             .commit()
     }
 
